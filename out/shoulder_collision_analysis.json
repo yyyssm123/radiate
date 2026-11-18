@@ -1,0 +1,2891 @@
+{
+  "source": "out/shoulder_collision_state.json",
+  "observed_at": "2026-11-17T20:24:39.334643+08:00",
+  "q_rad": [
+    -0.001791641698218882,
+    0.0,
+    0.05495965853333473,
+    0.024747425690293312,
+    -0.01678990013897419,
+    1.4494200944900513,
+    0.09952899068593979,
+    0.15505190193653107,
+    -1.4768520593643188,
+    0.02147573232650757,
+    0.061946459114551544,
+    -0.1457281857728958,
+    1.4702486991882324,
+    -0.09383648633956909,
+    0.03498195484280586,
+    -0.05784785374999046
+  ],
+  "captured_collision_error": "模型自碰撞: ['Pitching_Link', 'left_hand_palm_link'], 穿透 21.0 mm",
+  "captured_contacts": [
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_palm_link"
+      ],
+      "distance_mm": -20.998437493315947,
+      "geom_ids": [
+        12,
+        36
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_palm_link"
+      ],
+      "distance_mm": -20.971361188017102,
+      "geom_ids": [
+        12,
+        36
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_palm_link"
+      ],
+      "distance_mm": -21.160000061794406,
+      "geom_ids": [
+        12,
+        36
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_palm_link"
+      ],
+      "distance_mm": -21.182657078142622,
+      "geom_ids": [
+        12,
+        36
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_middle_0_link"
+      ],
+      "distance_mm": -61.83201688610502,
+      "geom_ids": [
+        12,
+        44
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_middle_0_link"
+      ],
+      "distance_mm": -61.83571121453069,
+      "geom_ids": [
+        12,
+        44
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_middle_1_link"
+      ],
+      "distance_mm": -58.27579459733816,
+      "geom_ids": [
+        12,
+        46
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_middle_1_link"
+      ],
+      "distance_mm": -58.229963318487115,
+      "geom_ids": [
+        12,
+        46
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_index_0_link"
+      ],
+      "distance_mm": -29.123685165190214,
+      "geom_ids": [
+        12,
+        48
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_index_0_link"
+      ],
+      "distance_mm": -29.122609432958352,
+      "geom_ids": [
+        12,
+        48
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_index_1_link"
+      ],
+      "distance_mm": -29.123332440279828,
+      "geom_ids": [
+        12,
+        50
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Pitching_Link",
+        "left_hand_index_1_link"
+      ],
+      "distance_mm": -29.113745176829866,
+      "geom_ids": [
+        12,
+        50
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Yaw_Link",
+        "left_hand_palm_link"
+      ],
+      "distance_mm": -20.945931845022063,
+      "geom_ids": [
+        14,
+        36
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Yaw_Link",
+        "left_hand_palm_link"
+      ],
+      "distance_mm": -21.241115415822218,
+      "geom_ids": [
+        14,
+        36
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Yaw_Link",
+        "left_hand_middle_0_link"
+      ],
+      "distance_mm": -4.15784526759978,
+      "geom_ids": [
+        14,
+        44
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Yaw_Link",
+        "left_hand_middle_0_link"
+      ],
+      "distance_mm": -4.230172130437737,
+      "geom_ids": [
+        14,
+        44
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Yaw_Link",
+        "left_hand_middle_0_link"
+      ],
+      "distance_mm": -4.23011753037748,
+      "geom_ids": [
+        14,
+        44
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Yaw_Link",
+        "left_hand_index_0_link"
+      ],
+      "distance_mm": -14.26343427169093,
+      "geom_ids": [
+        14,
+        48
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Yaw_Link",
+        "left_hand_index_0_link"
+      ],
+      "distance_mm": -14.263536918548326,
+      "geom_ids": [
+        14,
+        48
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Yaw_Link",
+        "left_hand_index_0_link"
+      ],
+      "distance_mm": -14.237872678411337,
+      "geom_ids": [
+        14,
+        48
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "Yaw_Link",
+        "left_hand_index_1_link"
+      ],
+      "distance_mm": -5.342020469001102,
+      "geom_ids": [
+        14,
+        50
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "torso_link",
+        "right_shoulder_yaw_link"
+      ],
+      "distance_mm": -1.966018518895693,
+      "geom_ids": [
+        16,
+        56
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "torso_link",
+        "right_shoulder_yaw_link"
+      ],
+      "distance_mm": -1.9722710586779832,
+      "geom_ids": [
+        16,
+        56
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "torso_link",
+        "right_shoulder_yaw_link"
+      ],
+      "distance_mm": -1.9776850249119946,
+      "geom_ids": [
+        16,
+        56
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    },
+    {
+      "bodies": [
+        "torso_link",
+        "right_shoulder_yaw_link"
+      ],
+      "distance_mm": -1.9705969120193505,
+      "geom_ids": [
+        16,
+        56
+      ],
+      "geom_types": [
+        7,
+        7
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "branch": "captured",
+      "context": {
+        "function": "continuous_line_ik",
+        "line": 222,
+        "time_s": null
+      },
+      "error": "模型自碰撞: ['torso_link', 'left_shoulder_yaw_link'], 穿透 7.9 mm",
+      "q_rad": [
+        -0.001791641698218882,
+        0.0,
+        -0.20263454085149027,
+        -0.09167634900318368,
+        0.22837657587433652,
+        0.5983386178722471,
+        0.10046808527022363,
+        -0.41011176828281654,
+        -1.4768520593643188,
+        0.02147573232650757,
+        0.061946459114551544,
+        -0.1457281857728958,
+        1.4702486991882324,
+        -0.09383648633956909,
+        0.03498195484280586,
+        -0.05784785374999046
+      ],
+      "contacts": [
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -7.915101016849306,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -7.915318828494191,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -7.550468147252616,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -7.5395093875744665,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.966018518895693,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9722710586779832,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9776850249119946,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9705969120193505,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "branch": "neutral",
+      "context": {
+        "function": "validate_motion",
+        "line": 188,
+        "time_s": 0.0,
+        "segment": "approach"
+      },
+      "error": "模型自碰撞: ['Pitching_Link', 'left_hand_palm_link'], 穿透 21.0 mm",
+      "q_rad": [
+        -0.001791641698218882,
+        0.0,
+        0.05495965853333473,
+        0.024747425690293312,
+        -0.01678990013897419,
+        1.4494200944900513,
+        0.09952899068593979,
+        0.15505190193653107,
+        -1.4768520593643188,
+        0.02147573232650757,
+        0.061946459114551544,
+        -0.1457281857728958,
+        1.4702486991882324,
+        -0.09383648633956909,
+        0.03498195484280586,
+        -0.05784785374999046
+      ],
+      "contacts": [
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.998437493315947,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.971361188017102,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.160000061794406,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.182657078142622,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -61.83201688610502,
+          "geom_ids": [
+            12,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -61.83571121453069,
+          "geom_ids": [
+            12,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_1_link"
+          ],
+          "distance_mm": -58.27579459733816,
+          "geom_ids": [
+            12,
+            46
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_1_link"
+          ],
+          "distance_mm": -58.229963318487115,
+          "geom_ids": [
+            12,
+            46
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -29.123685165190214,
+          "geom_ids": [
+            12,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -29.122609432958352,
+          "geom_ids": [
+            12,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -29.123332440279828,
+          "geom_ids": [
+            12,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -29.113745176829866,
+          "geom_ids": [
+            12,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.945931845022063,
+          "geom_ids": [
+            14,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.241115415822218,
+          "geom_ids": [
+            14,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.15784526759978,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.230172130437737,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.23011753037748,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.26343427169093,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.263536918548326,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.237872678411337,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -5.342020469001102,
+          "geom_ids": [
+            14,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.966018518895693,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9722710586779832,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9776850249119946,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9705969120193505,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "branch": "captured-margin",
+      "context": {
+        "function": "continuous_line_ik",
+        "line": 222,
+        "time_s": null
+      },
+      "error": "模型自碰撞: ['torso_link', 'left_shoulder_yaw_link'], 穿透 8.3 mm",
+      "q_rad": [
+        -0.001791641698218882,
+        0.0,
+        -0.2010294768334102,
+        -0.09335278102754327,
+        0.22993936511285487,
+        0.5909556045051386,
+        0.1053952950379451,
+        -0.39218521951364377,
+        -1.4768520593643188,
+        0.02147573232650757,
+        0.061946459114551544,
+        -0.1457281857728958,
+        1.4702486991882324,
+        -0.09383648633956909,
+        0.03498195484280586,
+        -0.05784785374999046
+      ],
+      "contacts": [
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -8.257405711108264,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -8.257642700347715,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -7.889299244986248,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -7.878098898056813,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.966018518895693,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9722710586779832,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9776850249119946,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9705969120193505,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "branch": "shoulder-yaw--1",
+      "context": {
+        "function": "validate_motion",
+        "line": 188,
+        "time_s": 0.0,
+        "segment": "approach"
+      },
+      "error": "模型自碰撞: ['Pitching_Link', 'left_hand_palm_link'], 穿透 21.0 mm",
+      "q_rad": [
+        -0.001791641698218882,
+        0.0,
+        0.05495965853333473,
+        0.024747425690293312,
+        -0.01678990013897419,
+        1.4494200944900513,
+        0.09952899068593979,
+        0.15505190193653107,
+        -1.4768520593643188,
+        0.02147573232650757,
+        0.061946459114551544,
+        -0.1457281857728958,
+        1.4702486991882324,
+        -0.09383648633956909,
+        0.03498195484280586,
+        -0.05784785374999046
+      ],
+      "contacts": [
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.998437493315947,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.971361188017102,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.160000061794406,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.182657078142622,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -61.83201688610502,
+          "geom_ids": [
+            12,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -61.83571121453069,
+          "geom_ids": [
+            12,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_1_link"
+          ],
+          "distance_mm": -58.27579459733816,
+          "geom_ids": [
+            12,
+            46
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_1_link"
+          ],
+          "distance_mm": -58.229963318487115,
+          "geom_ids": [
+            12,
+            46
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -29.123685165190214,
+          "geom_ids": [
+            12,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -29.122609432958352,
+          "geom_ids": [
+            12,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -29.123332440279828,
+          "geom_ids": [
+            12,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -29.113745176829866,
+          "geom_ids": [
+            12,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.945931845022063,
+          "geom_ids": [
+            14,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.241115415822218,
+          "geom_ids": [
+            14,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.15784526759978,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.230172130437737,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.23011753037748,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.26343427169093,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.263536918548326,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.237872678411337,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -5.342020469001102,
+          "geom_ids": [
+            14,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.966018518895693,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9722710586779832,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9776850249119946,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9705969120193505,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "branch": "shoulder-yaw--0.5",
+      "context": {
+        "function": "validate_motion",
+        "line": 188,
+        "time_s": 0.0,
+        "segment": "approach"
+      },
+      "error": "模型自碰撞: ['Pitching_Link', 'left_hand_palm_link'], 穿透 21.0 mm",
+      "q_rad": [
+        -0.001791641698218882,
+        0.0,
+        0.05495965853333473,
+        0.024747425690293312,
+        -0.01678990013897419,
+        1.4494200944900513,
+        0.09952899068593979,
+        0.15505190193653107,
+        -1.4768520593643188,
+        0.02147573232650757,
+        0.061946459114551544,
+        -0.1457281857728958,
+        1.4702486991882324,
+        -0.09383648633956909,
+        0.03498195484280586,
+        -0.05784785374999046
+      ],
+      "contacts": [
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.998437493315947,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.971361188017102,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.160000061794406,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.182657078142622,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -61.83201688610502,
+          "geom_ids": [
+            12,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -61.83571121453069,
+          "geom_ids": [
+            12,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_1_link"
+          ],
+          "distance_mm": -58.27579459733816,
+          "geom_ids": [
+            12,
+            46
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_1_link"
+          ],
+          "distance_mm": -58.229963318487115,
+          "geom_ids": [
+            12,
+            46
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -29.123685165190214,
+          "geom_ids": [
+            12,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -29.122609432958352,
+          "geom_ids": [
+            12,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -29.123332440279828,
+          "geom_ids": [
+            12,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -29.113745176829866,
+          "geom_ids": [
+            12,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.945931845022063,
+          "geom_ids": [
+            14,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.241115415822218,
+          "geom_ids": [
+            14,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.15784526759978,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.230172130437737,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.23011753037748,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.26343427169093,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.263536918548326,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.237872678411337,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -5.342020469001102,
+          "geom_ids": [
+            14,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.966018518895693,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9722710586779832,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9776850249119946,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9705969120193505,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "branch": "shoulder-yaw--1.5",
+      "context": {
+        "function": "validate_motion",
+        "line": 188,
+        "time_s": 0.0,
+        "segment": "approach"
+      },
+      "error": "模型自碰撞: ['Pitching_Link', 'left_hand_palm_link'], 穿透 21.0 mm",
+      "q_rad": [
+        -0.001791641698218882,
+        0.0,
+        0.05495965853333473,
+        0.024747425690293312,
+        -0.01678990013897419,
+        1.4494200944900513,
+        0.09952899068593979,
+        0.15505190193653107,
+        -1.4768520593643188,
+        0.02147573232650757,
+        0.061946459114551544,
+        -0.1457281857728958,
+        1.4702486991882324,
+        -0.09383648633956909,
+        0.03498195484280586,
+        -0.05784785374999046
+      ],
+      "contacts": [
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.998437493315947,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.971361188017102,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.160000061794406,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.182657078142622,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -61.83201688610502,
+          "geom_ids": [
+            12,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -61.83571121453069,
+          "geom_ids": [
+            12,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_1_link"
+          ],
+          "distance_mm": -58.27579459733816,
+          "geom_ids": [
+            12,
+            46
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_1_link"
+          ],
+          "distance_mm": -58.229963318487115,
+          "geom_ids": [
+            12,
+            46
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -29.123685165190214,
+          "geom_ids": [
+            12,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -29.122609432958352,
+          "geom_ids": [
+            12,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -29.123332440279828,
+          "geom_ids": [
+            12,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -29.113745176829866,
+          "geom_ids": [
+            12,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.945931845022063,
+          "geom_ids": [
+            14,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.241115415822218,
+          "geom_ids": [
+            14,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.15784526759978,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.230172130437737,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.23011753037748,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.26343427169093,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.263536918548326,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.237872678411337,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -5.342020469001102,
+          "geom_ids": [
+            14,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.966018518895693,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9722710586779832,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9776850249119946,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9705969120193505,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "branch": "shoulder-yaw-0.5",
+      "context": {
+        "function": "validate_motion",
+        "line": 188,
+        "time_s": 0.0,
+        "segment": "approach"
+      },
+      "error": "模型自碰撞: ['Pitching_Link', 'left_hand_palm_link'], 穿透 21.0 mm",
+      "q_rad": [
+        -0.001791641698218882,
+        0.0,
+        0.05495965853333473,
+        0.024747425690293312,
+        -0.01678990013897419,
+        1.4494200944900513,
+        0.09952899068593979,
+        0.15505190193653107,
+        -1.4768520593643188,
+        0.02147573232650757,
+        0.061946459114551544,
+        -0.1457281857728958,
+        1.4702486991882324,
+        -0.09383648633956909,
+        0.03498195484280586,
+        -0.05784785374999046
+      ],
+      "contacts": [
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.998437493315947,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.971361188017102,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.160000061794406,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.182657078142622,
+          "geom_ids": [
+            12,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -61.83201688610502,
+          "geom_ids": [
+            12,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -61.83571121453069,
+          "geom_ids": [
+            12,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_1_link"
+          ],
+          "distance_mm": -58.27579459733816,
+          "geom_ids": [
+            12,
+            46
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_middle_1_link"
+          ],
+          "distance_mm": -58.229963318487115,
+          "geom_ids": [
+            12,
+            46
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -29.123685165190214,
+          "geom_ids": [
+            12,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -29.122609432958352,
+          "geom_ids": [
+            12,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -29.123332440279828,
+          "geom_ids": [
+            12,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Pitching_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -29.113745176829866,
+          "geom_ids": [
+            12,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -20.945931845022063,
+          "geom_ids": [
+            14,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_palm_link"
+          ],
+          "distance_mm": -21.241115415822218,
+          "geom_ids": [
+            14,
+            36
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.15784526759978,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.230172130437737,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_middle_0_link"
+          ],
+          "distance_mm": -4.23011753037748,
+          "geom_ids": [
+            14,
+            44
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.26343427169093,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.263536918548326,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_0_link"
+          ],
+          "distance_mm": -14.237872678411337,
+          "geom_ids": [
+            14,
+            48
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "Yaw_Link",
+            "left_hand_index_1_link"
+          ],
+          "distance_mm": -5.342020469001102,
+          "geom_ids": [
+            14,
+            50
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.966018518895693,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9722710586779832,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9776850249119946,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9705969120193505,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "branch": "shoulder-yaw-1",
+      "context": {
+        "function": "continuous_line_ik",
+        "line": 222,
+        "time_s": null
+      },
+      "error": "模型自碰撞: ['left_shoulder_roll_link', 'torso_link'], 穿透 5.8 mm",
+      "q_rad": [
+        -0.001791641698218882,
+        0.0,
+        -0.34687845963067776,
+        -0.2605888700591523,
+        0.4254892158439444,
+        0.5310327866797897,
+        -1.8272219047798548,
+        -0.8916819779873861,
+        -1.4768520593643188,
+        0.02147573232650757,
+        0.061946459114551544,
+        -0.1457281857728958,
+        1.4702486991882324,
+        -0.09383648633956909,
+        0.03498195484280586,
+        -0.05784785374999046
+      ],
+      "contacts": [
+        {
+          "bodies": [
+            "left_shoulder_roll_link",
+            "torso_link"
+          ],
+          "distance_mm": -5.764875913477227,
+          "geom_ids": [
+            24,
+            16
+          ],
+          "geom_types": [
+            5,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -21.76114399101888,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -21.681750270563537,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -21.68986698713002,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "left_shoulder_yaw_link"
+          ],
+          "distance_mm": -21.770882803676525,
+          "geom_ids": [
+            16,
+            26
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.966018518895693,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9722710586779832,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9776850249119946,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        },
+        {
+          "bodies": [
+            "torso_link",
+            "right_shoulder_yaw_link"
+          ],
+          "distance_mm": -1.9705969120193505,
+          "geom_ids": [
+            16,
+            56
+          ],
+          "geom_types": [
+            7,
+            7
+          ]
+        }
+      ]
+    }
+  ],
+  "result": "rejected",
+  "error": "所有 IK 候选均未通过完整路径预检: 模型自碰撞: ['left_shoulder_roll_link', 'torso_link'], 穿透 5.8 mm"
+}

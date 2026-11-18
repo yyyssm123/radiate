@@ -1,0 +1,88 @@
+{
+  "result": "passed",
+  "error": null,
+  "scope": "Offline MuJoCo physics replay at 1 kHz with 500 Hz controller; actual SDK message/CRC but no DDS channels or hardware motion. Temporary left-hand-removed model only.",
+  "source": "out/shoulder_collision_state.json",
+  "temporary_model": "/tmp/g1d_left_hand_removed_diagnostic.xml",
+  "plan": {
+    "ik_max_mm": 1.630582189056893e-08,
+    "length_m": 0.5,
+    "target_bottom_m": [
+      0.27737523566396904,
+      0.14846387389761673,
+      0.7347417820984778
+    ],
+    "target_top_m": [
+      0.27737523566396904,
+      0.14846387389761673,
+      1.2347417820984778
+    ],
+    "approach_s": 11.297918254242228,
+    "scan_s": 20.27564057578443,
+    "return_s": 11.297918254242228,
+    "anchor": "zero",
+    "max_start_gap_rad": 1.4768520593643188,
+    "planner": "continuous Jacobian IK + local path-speed LP, exact joint extrema check",
+    "requested_peak_speed_m_s": 0.1,
+    "planned_peak_path_speed_m_s": 0.09448341617509268,
+    "checked_peak_tip_speed_m_s": 0.09421931776445763,
+    "planned_mean_path_speed_m_s": 0.04932026666493183,
+    "planned_peak_joint_speed_rad_s": 0.2450065827232322,
+    "planned_peak_joint_acceleration_rad_s2": 0.48999902000147116,
+    "joint_speed_limit_rad_s": 0.25,
+    "joint_acceleration_limit_rad_s2": 0.5,
+    "timing_certification_scale": 1.000001,
+    "startup_source": "captured LowState (offline uses example pose)",
+    "startup_q_rad": [
+      -0.001791641698218882,
+      0.0,
+      0.05495965853333473,
+      0.024747425690293312,
+      -0.01678990013897419,
+      1.4494200944900513,
+      0.09952899068593979,
+      0.15505190193653107,
+      -1.4768520593643188,
+      0.02147573232650757,
+      0.061946459114551544,
+      -0.1457281857728958,
+      1.4702486991882324,
+      -0.09383648633956909,
+      0.03498195484280586,
+      -0.05784785374999046
+    ],
+    "collision_branches_rejected": 1,
+    "ik_branch": "neutral",
+    "planned_transverse_max_mm": 9.409874370495975e-06
+  },
+  "phases": [
+    {
+      "phase": "startup-hold",
+      "virtual_time_s": 0.0
+    },
+    {
+      "phase": "approach",
+      "virtual_time_s": 2.0
+    },
+    {
+      "phase": "scan",
+      "virtual_time_s": 13.298
+    },
+    {
+      "phase": "return",
+      "virtual_time_s": 33.574
+    },
+    {
+      "phase": "finished-hold",
+      "virtual_time_s": 44.872
+    }
+  ],
+  "controller_complete": true,
+  "minimum_measured_joint_limit_margin_rad_all_physics_steps": 0.043630000043465254,
+  "maximum_joint_tracking_error_rad": 0.11946001218686719,
+  "physics_steps": 45374,
+  "messages_accepted": 22687,
+  "messages_rejected": 0,
+  "wall_seconds": 26.490325049999228,
+  "production_files_unchanged": true
+}

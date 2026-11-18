@@ -1,0 +1,138 @@
+扫描规划：请求峰值 10.00 cm/s，规划路径峰值 9.05 cm/s，扫描往返 21.68 s；关节峰值 0.245 rad/s、0.490 rad/s²。
+{
+  "ik_max_mm": 1.9346891053816413e-08,
+  "length_m": 0.5,
+  "target_bottom_m": [
+    0.23823125139002646,
+    0.19103558295018291,
+    0.7347417820984778
+  ],
+  "target_top_m": [
+    0.23823125139002646,
+    0.19103558295018291,
+    1.2347417820984778
+  ],
+  "approach_s": 12.0051930256088,
+  "scan_s": 21.683575929688303,
+  "return_s": 12.0051930256088,
+  "anchor": "zero",
+  "max_start_gap_rad": 1.5693062778573594,
+  "planner": "continuous Jacobian IK + local path-speed LP, exact joint extrema check",
+  "requested_peak_speed_m_s": 0.1,
+  "planned_peak_path_speed_m_s": 0.09045537700049537,
+  "checked_peak_tip_speed_m_s": 0.09016772825304947,
+  "planned_mean_path_speed_m_s": 0.04611785451083459,
+  "planned_peak_joint_speed_rad_s": 0.2450073562729006,
+  "planned_peak_joint_acceleration_rad_s2": 0.4899990200014714,
+  "joint_speed_limit_rad_s": 0.25,
+  "joint_acceleration_limit_rad_s2": 0.5,
+  "timing_certification_scale": 1.000001,
+  "startup_source": "captured LowState (offline uses example pose)",
+  "startup_q_rad": [
+    0.2280178666114807,
+    0.0,
+    -0.058830562978982925,
+    -0.061167486011981964,
+    1.496434211730957,
+    1.379360318183899,
+    -0.19360515475273132,
+    0.72737056016922,
+    -1.3222315311431885,
+    0.03501790761947632,
+    0.052742574363946915,
+    -0.16595755517482758,
+    1.4605175256729126,
+    0.7535081505775452,
+    -0.027947213500738144,
+    -0.037342846393585205
+  ],
+  "collision_branches_rejected": 3,
+  "ik_branch": "shoulder-yaw--1",
+  "planned_transverse_max_mm": 1.4005472485451455e-05,
+  "joint_names": [
+    "torso_Joint",
+    "Yaw_Joint",
+    "left_shoulder_pitch_joint",
+    "left_shoulder_roll_joint",
+    "left_shoulder_yaw_joint",
+    "left_elbow_joint",
+    "left_wrist_roll_joint",
+    "left_wrist_pitch_joint",
+    "left_wrist_yaw_joint",
+    "right_shoulder_pitch_joint",
+    "right_shoulder_roll_joint",
+    "right_shoulder_yaw_joint",
+    "right_elbow_joint",
+    "right_wrist_roll_joint",
+    "right_wrist_pitch_joint",
+    "right_wrist_yaw_joint"
+  ],
+  "captured_q_rad": [
+    0.2280178666114807,
+    0.0,
+    -0.058830562978982925,
+    -0.061167486011981964,
+    1.496434211730957,
+    1.379360318183899,
+    -0.19360515475273132,
+    0.72737056016922,
+    -1.3222315311431885,
+    0.03501790761947632,
+    0.052742574363946915,
+    -0.16595755517482758,
+    1.4605175256729126,
+    0.7535081505775452,
+    -0.027947213500738144,
+    -0.037342846393585205
+  ],
+  "pd_kp": [
+    60.0,
+    0.0,
+    40.0,
+    40.0,
+    40.0,
+    40.0,
+    40.0,
+    40.0,
+    40.0,
+    40.0,
+    40.0,
+    40.0,
+    40.0,
+    40.0,
+    40.0,
+    40.0
+  ],
+  "pd_kd": [
+    1.0,
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "mode_machine": 1,
+  "locked_waist_pitch_rad": 0.0,
+  "not_commanded_slots": [
+    14
+  ],
+  "motion_control_check": {
+    "scope": "local loopback simulator; no built-in motion controller"
+  }
+}
+首帧及启动保持使用上述 captured_q_rad；随后限速接近扫描起点，结束返回该姿态。
+[0.0s] startup-hold
+结束发送，共 1 帧，平均 7.4 Hz；记录: /home/lenovo/fushe-G1-D/out/dds_scan_1794906591771723035/trajectory.csv
+[Reader] take sample error
+[Reader] take sample error
+已停止轨迹与发送: 控制循环调度间隔异常: 0.1254 s

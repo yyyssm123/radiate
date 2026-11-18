@@ -1,0 +1,62 @@
+{
+  "scope": "Read-only offline geometry audit; original triangle surfaces via FCL compared with MuJoCo convex contacts. No controller/model edits or hardware motion.",
+  "source": "out/collision_latest.json",
+  "results": [
+    {
+      "pose": "captured",
+      "bodies": [
+        "torso_link",
+        "right_shoulder_yaw_link"
+      ],
+      "mujoco_convex_penetration_mm": 4.272986675122885,
+      "triangle_mesh_collision": true,
+      "triangle_contacts": 100,
+      "triangle_distance_mm": 0.0
+    },
+    {
+      "pose": "last_ik_candidate",
+      "bodies": [
+        "torso_link",
+        "left_shoulder_yaw_link"
+      ],
+      "mujoco_convex_penetration_mm": 10.806661876249636,
+      "triangle_mesh_collision": true,
+      "triangle_contacts": 100,
+      "triangle_distance_mm": 0.0
+    },
+    {
+      "pose": "last_ik_candidate",
+      "bodies": [
+        "torso_link",
+        "right_shoulder_yaw_link"
+      ],
+      "mujoco_convex_penetration_mm": 4.272986675122885,
+      "triangle_mesh_collision": true,
+      "triangle_contacts": 100,
+      "triangle_distance_mm": 0.0
+    }
+  ],
+  "meshes": {
+    "torso_link": {
+      "vertices": 22296,
+      "triangles": 44658,
+      "watertight": false,
+      "volume_m3": 0.00394128669300851,
+      "hull_volume_m3": 0.006979122304891327
+    },
+    "right_shoulder_yaw_link": {
+      "vertices": 2501,
+      "triangles": 4998,
+      "watertight": false,
+      "volume_m3": 0.0004142654573413091,
+      "hull_volume_m3": 0.0005845789531275725
+    },
+    "left_shoulder_yaw_link": {
+      "vertices": 2493,
+      "triangles": 4982,
+      "watertight": false,
+      "volume_m3": 0.00041427487314235086,
+      "hull_volume_m3": 0.0005845749482661285
+    }
+  }
+}

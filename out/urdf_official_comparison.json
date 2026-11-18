@@ -1,0 +1,22 @@
+{
+  "official_url": "https://github.com/unitreerobotics/unitree_ros/blob/master/robots/g1_d_description/g1_d.urdf",
+  "local_urdf": "/home/lenovo/fushe-G1-D/models/g1_d.urdf",
+  "official_reference": "/tmp/unitree_official_g1_d_audit.urdf",
+  "local_sha256": "672ff4048b6b25ad7d4ee918b9e4449b76a0a2066f55de9c55fd9d6c60d5afc4",
+  "official_sha256": "5df561490cb907dccee0d7926531c250a85b89bd3f47a8ff5bcc311c58cc202e",
+  "xml_equal_after_normalizing_mesh_filenames": true,
+  "joint_comparison": {
+    "local_count": 44,
+    "official_count": 44,
+    "only_local": [],
+    "only_official": [],
+    "different": []
+  },
+  "link_comparison": {
+    "local_count": 45,
+    "official_count": 45,
+    "only_local": [],
+    "only_official": [],
+    "different": []
+  }
+}
