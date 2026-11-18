@@ -32,8 +32,8 @@ class OfflineRobot:
     def read(self):
         return self.cache.read()
 
-    def publish(self, q, state):
-        command = self.codec.encode(q, state)
+    def publish(self, q, state, feedforward=None):
+        command = self.codec.encode(q, state, feedforward)
         command = type(command).deserialize(command.serialize())
         if command.crc != self.codec.crc.Crc(command):
             raise ControlFault("离线 IDL 往返的 LowCmd CRC 错误")

@@ -17,9 +17,10 @@ import numpy as np
 from g1d_config import (ROOT, CONTROLLED_JOINTS, ARM_JOINTS, initial_pose,
                         DEFAULT_LOCKED_WAIST_PITCH, WAIST_PITCH_INDEX, load_assembly)
 from g1d_transport import ControlFault, DdsRobot, KP, KD
+from fixed_scan import FixedScanSegments, fixed_scan_plan
 from joint_limits import joint_limit_violations
-from real_motion import Geometry, Guard, Limits, scan_plan, probe_plan
-from real_runtime import Controller, CsvLog
+from real_motion import GRAVITY_JOINTS, Geometry, Guard, Limits, scan_plan, probe_plan
+from real_runtime import Controller, CsvLog, SETTLE_SECONDS
 from motion_control import require_released, wait_start_button
 
 
@@ -78,8 +79,12 @@ def parser():
     p.add_argument("--length", type=float, default=.50)
     p.add_argument("--forward", type=float, default=.02)
     p.add_argument("--center-dz", type=float, default=.20)
-    p.add_argument("--anchor", choices=("zero", "current"), default="zero",
-                   help="参考零位或捕获姿态的左腕位置；腰角始终使用捕获值")
+    p.add_argument("--scan-mode", choices=("fixed", "adaptive"),
+                   help="默认 fixed，复用固定 50 cm 扫描轨迹；adaptive 每次按捕获姿态求 IK")
+    p.add_argument("--anchor", choices=("zero", "current"),
+                   help="adaptive 的扫描线参考点，默认 zero；指定该选项会选择 adaptive")
+    p.add_argument("--gravity-compensation", action="store_true",
+                   help="固定扫描可选，为左肩俯仰和左肘添加模型重力前馈")
     p.add_argument("--speed", type=float, default=.03,
                    help="扫描路径速度上限 m/s；关节约束较紧的位置会局部减速")
     p.add_argument("--cycles", type=int, default=1)
@@ -103,8 +108,10 @@ def build(args, q, limits, action=None):
         geometry.collision(q)
         return [], geometry, {"action": "hold", "q_rad": q.tolist(),
                               "end_effectors": geometry.arm.end_effectors}
+    if args.scan_mode == "fixed":
+        return fixed_scan_plan(q, limits, args.speed, args.cycles)
     return scan_plan(q, limits, args.length, args.forward, args.center_dz,
-                     args.speed, args.cycles, args.anchor)
+                     args.speed, args.cycles, args.anchor or "zero")
 
 
 def inspect_report(robot, state, limits):
@@ -135,7 +142,14 @@ def inspect_report(robot, state, limits):
 def build_preflight(args, q, limits, report_path, feedback=None):
     """失败也保存同一捕获姿态和各候选原因，供离线复现；此阶段尚无指令 writer。"""
     try:
-        return build(args, q, limits)
+        segments, geometry, report = build(args, q, limits)
+        if limits.gravity_compensation:
+            gravity_peak = np.max([motion.peak_gravity_nm for _, motion in segments], axis=0)
+            report["gravity_compensation"] = {
+                "ramp_s": 2.,
+                "planned_peak_abs_nm": {CONTROLLED_JOINTS[i]: float(peak)
+                                         for i, peak in zip(GRAVITY_JOINTS, gravity_peak)}}
+        return segments, geometry, report
     except (ControlFault, ValueError) as exc:
         report = dict(feedback or {})
         report.update({"status": "planning-rejected", "failure_stage": "planning",
@@ -144,7 +158,8 @@ def build_preflight(args, q, limits, report_path, feedback=None):
                        "captured_q_rad": np.asarray(q, float).tolist(),
                        "network": args.network, "domain": args.domain,
                        "parameters": {name: getattr(args, name) for name in
-                                      ("length", "forward", "center_dz", "anchor", "speed", "cycles",
+                                      ("scan_mode", "gravity_compensation", "length", "forward", "center_dz",
+                                       "anchor", "speed", "cycles",
                                        "joint_speed", "joint_acceleration", "joint", "amplitude")},
                        "planning_error": str(exc),
                        "planning_diagnostics": getattr(exc, "details", {}),
@@ -160,6 +175,8 @@ def replay(segments, geometry, q, limits, log_path):
     robot.refresh(0.0)
     controller = Controller(robot.read(), segments, geometry, limits, 0.0)
     duration = 2.0 + sum(segment.duration for _, segment in segments) + .05
+    if isinstance(segments, FixedScanSegments):
+        duration += 2 * SETTLE_SECONDS + .05
     logger = CsvLog(log_path)
     phase = None
     try:
@@ -168,7 +185,7 @@ def replay(segments, geometry, q, limits, log_path):
             robot.refresh(now)
             state = robot.read()
             result = controller.tick(state, now)
-            robot.publish(result.q, state)
+            robot.publish(result.q, state, result.feedforward)
             logger.write(now, result, state, now)
             if result.phase != phase:
                 print(f"  {now:7.3f}s {result.phase}", flush=True)
@@ -187,33 +204,58 @@ def run_loop(robot, captured, segments, geometry, limits, log_path):
     def stop_handler(*_):
         signals["count"] += 1
         controller.stop()
-    logger = CsvLog(log_path)
     phase = None
     start = time.monotonic()
     controller = Controller(captured, segments, geometry, limits, start)
+    logger = CsvLog(log_path, background=True)
     previous_handlers = {s: signal.signal(s, stop_handler) for s in (signal.SIGINT, signal.SIGTERM)}
     deadline = start
     count = 0
     outcome = "operator-exit"
+    last_timing = {}
+    max_timing = dict.fromkeys(("gap_ms", "read_ms", "control_ms", "publish_ms",
+                               "log_ms", "sleep_overshoot_ms"), 0.)
+    gaps_over_10_ms = 0
     try:
         while signals["count"] < 2:
             now = time.monotonic()
+            gap_ms = (now - controller.previous)*1000
+            max_timing["gap_ms"] = max(max_timing["gap_ms"], gap_ms)
+            gaps_over_10_ms += gap_ms > 10.
+            measured = time.perf_counter()
             state = robot.read()
+            read_done = time.perf_counter()
             result = controller.tick(state, now)
-            robot.publish(result.q, state)
+            control_done = time.perf_counter()
+            if result.feedforward is None:
+                robot.publish(result.q, state)
+            else:
+                robot.publish(result.q, state, result.feedforward)
+            publish_done = time.perf_counter()
             logger.write(now - start, result, state, now)
+            log_done = time.perf_counter()
             count += 1
             if result.phase != phase:
                 print(f"[{now-start:.1f}s] {result.phase}", flush=True)
                 phase = result.phase
-                if phase.endswith("hold") and phase != "startup-hold":
+                if phase in ("finished-hold", "stopped-hold"):
                     print("持续发送保持目标；Ctrl+C 停轨迹，再次 Ctrl+C 退出发送。", flush=True)
             deadline += period
             slack = deadline - time.monotonic()
+            overshoot_ms = 0.
             if slack > 0:
+                sleep_started = time.perf_counter()
                 time.sleep(slack)
+                overshoot_ms = max(0., (time.perf_counter()-sleep_started-slack)*1000)
             else:
                 deadline = time.monotonic()
+            last_timing = {"read_ms": (read_done-measured)*1000,
+                           "control_ms": (control_done-read_done)*1000,
+                           "publish_ms": (publish_done-control_done)*1000,
+                           "log_ms": (log_done-publish_done)*1000,
+                           "sleep_overshoot_ms": overshoot_ms}
+            for name, value in last_timing.items():
+                max_timing[name] = max(max_timing[name], value)
     except BaseException as exc:
         outcome = f"{type(exc).__name__}: {exc}"
         raise
@@ -225,6 +267,9 @@ def run_loop(robot, captured, segments, geometry, limits, log_path):
         dump(log_path.with_suffix(".status.json"),
              {"outcome": outcome, "commands": count, "elapsed_s": elapsed,
               "average_rate_hz": count/max(elapsed, 1e-9), "last_phase": phase,
+              "loop_timing": {"max": max_timing, "last_successful_iteration": last_timing,
+                              "gaps_over_10_ms": gaps_over_10_ms},
+              "csv_dropped_rows": logger.dropped, "csv_error": logger.error,
               "last_target_rad": controller.last_q.tolist(),
               "scope": "发送停止；硬件最后目标和超时行为由固件决定"})
         print(f"结束发送，共 {count} 帧，平均 {count/max(elapsed,1e-9):.1f} Hz；记录: {log_path}")
@@ -233,6 +278,13 @@ def run_loop(robot, captured, segments, geometry, limits, log_path):
 def main(argv=None):
     p = parser()
     a = p.parse_args(argv)
+    custom_geometry = a.anchor is not None or (a.length, a.forward, a.center_dz) != (.50, .02, .20)
+    if a.scan_mode == "fixed" and custom_geometry:
+        p.error("固定扫描沿用标准 50 cm 路径；自定义扫描线时请用 --scan-mode adaptive")
+    if a.scan_mode is None:
+        a.scan_mode = "adaptive" if custom_geometry else "fixed"
+    if a.gravity_compensation and (a.scan_mode != "fixed" or a.action not in ("scan", "check", "replay")):
+        p.error("--gravity-compensation 仅用于固定扫描及其 check/replay")
     numeric = [a.length, a.forward, a.center_dz, a.speed, a.joint_speed,
                a.joint_acceleration, a.state_timeout, a.tracking_error, a.waist_error,
                a.timeout, a.amplitude, a.locked_waist_pitch_angle]
@@ -244,6 +296,7 @@ def main(argv=None):
     limits = Limits(state_timeout=a.state_timeout, joint_speed=a.joint_speed,
                     joint_acceleration=a.joint_acceleration,
                     following_error=a.tracking_error, torso_error=a.waist_error,
+                    gravity_compensation=a.gravity_compensation,
                     locked_waist_pitch=(a.locked_waist_pitch_angle if a.waist_pitch_mode == "locked" else None))
     report_path = a.report or ROOT / "out" / f"{a.action}_{timestamp()}.json"
     if a.action in ("check", "replay"):
@@ -326,7 +379,9 @@ def main(argv=None):
             dump(report_path, report)
             print_timing(report)
             print(json.dumps(report, ensure_ascii=False, indent=2, default=float))
-            print("首帧及启动保持使用上述 captured_q_rad；随后限速接近扫描起点，结束返回该姿态。", flush=True)
+            print("首帧及启动保持使用上述 captured_q_rad。", flush=True)
+            if isinstance(segments, FixedScanSegments):
+                print("左臂停稳后进入固定扫描段，扫描完成后复核反馈并收臂。", flush=True)
             run_loop(robot, captured, segments, geometry, limits,
                      a.log or ROOT / "out" / f"real_{timestamp()}.csv")
             return 0

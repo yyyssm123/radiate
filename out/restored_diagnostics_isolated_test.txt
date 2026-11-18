@@ -1,6 +1,0 @@
-test_live_scan_aborts_before_remote_start_planning_or_writer (test_joint_limits.TestJointLimitDiagnostics) ... ok
-
-----------------------------------------------------------------------
-Ran 1 test in 0.108s
-
-OK

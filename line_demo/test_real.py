@@ -322,6 +322,9 @@ class TestSendingLoop(unittest.TestCase):
             status = json.loads(path.with_suffix(".status.json").read_text())
             self.assertEqual(status["commands"], 3)
             self.assertEqual(status["outcome"], "operator-exit")
+            self.assertEqual(status["csv_dropped_rows"], 0)
+            self.assertIsNone(status["csv_error"])
+            self.assertAlmostEqual(status["loop_timing"]["max"]["gap_ms"], 2.)
             self.assertGreater(len(path.read_text().splitlines()), 1)
         self.assertIs(signal.getsignal(signal.SIGINT), previous)
 

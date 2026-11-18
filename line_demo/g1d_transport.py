@@ -80,10 +80,14 @@ class Codec:
                         buttons=int(msg.wireless_remote[2]) | int(msg.wireless_remote[3]) << 8,
                         received=now, progressed=progressed)
 
-    def encode(self, q, state):
+    def encode(self, q, state, feedforward=None):
         q = np.asarray(q, float)
         if q.shape != (len(SLOTS),) or not np.isfinite(q).all():
             raise ControlFault("指令必须是 16 个有限关节角")
+        if feedforward is not None:
+            feedforward = np.asarray(feedforward, float)
+            if feedforward.shape != q.shape or not np.isfinite(feedforward).all():
+                raise ControlFault("前馈指令必须是 16 个有限力矩")
         if (self.locked_waist_pitch is not None
                 and abs(q[WAIST_PITCH_INDEX]-self.locked_waist_pitch) > .001):
             raise ControlFault("目标腰部俯仰角与已确认的锁定角不一致")
@@ -97,7 +101,7 @@ class Codec:
             motor.mode = 1
             motor.q = float(q[k])
             motor.dq = 0.0
-            motor.tau = 0.0
+            motor.tau = 0.0 if feedforward is None else float(feedforward[k])
             motor.kp = float(KP[k])
             motor.kd = float(KD[k])
         # 无效槽位 0–11/13 和 29–34 保持默认 mode=0、kp=kd=tau=0。
@@ -168,9 +172,9 @@ class DdsRobot:
             self.publisher.Init()
             # writer 初始化可能耗时；调用方会先用 seed 保持，再进行任何运动。
 
-    def publish(self, q, state):
+    def publish(self, q, state, feedforward=None):
         self.prepare()
-        if not self.publisher.Write(self.codec.encode(q, state)):
+        if not self.publisher.Write(self.codec.encode(q, state, feedforward)):
             raise ControlFault("LowCmd DDS 写入失败")
         self.sent += 1
 

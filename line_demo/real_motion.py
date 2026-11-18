@@ -13,6 +13,10 @@ from line_servo_demo import Arm, make_line
 from path_timing import LocalPathMotion
 
 
+GRAVITY_JOINTS = np.array([CONTROLLED_JOINTS.index(name) for name in
+                           ("left_shoulder_pitch_joint", "left_elbow_joint")])
+
+
 class PlanningFault(ControlFault):
     def __init__(self, message, details):
         super().__init__(message)
@@ -46,6 +50,7 @@ class Limits:
     temperature: float = 70.0
     torque_fraction: float = 0.90
     locked_waist_pitch: float | None = None
+    gravity_compensation: bool = False
 
 
 class Guard:
@@ -107,7 +112,15 @@ class Guard:
             rows = joint_limit_violations(q, self.limits.margin, (self.lo, self.hi))
             raise ControlFault("目标接近或超出限位: " + format_joint_limit_violations(rows))
 
-    def command(self, q, state, now, dt, holding=False):
+    def check_torque(self, torque, source):
+        if not np.isfinite(torque).all():
+            raise ControlFault(f"{source}力矩包含非有限数值")
+        ratio = np.abs(torque) / self.effort
+        if np.any(ratio > self.limits.torque_fraction):
+            j = int(np.argmax(ratio))
+            raise ControlFault(f"{source}力矩超预算: {CONTROLLED_JOINTS[j]} {torque[j]:+.2f} N·m")
+
+    def command(self, q, state, now, dt, holding=False, feedforward=None):
         self.state(state, now)
         self.position(q)
         q = np.asarray(q)
@@ -127,10 +140,9 @@ class Guard:
             self.last_velocity = np.zeros_like(q)
         # 这是发送前的 PD 力矩估计，不能替代电机固件的硬限幅。
         predicted_torque = KP * (q - state.q) - KD * state.dq
-        if np.any(np.abs(predicted_torque) > self.effort * self.limits.torque_fraction):
-            j = int(np.argmax(np.abs(predicted_torque) / self.effort))
-            raise ControlFault(f"预计 PD 力矩超预算: {CONTROLLED_JOINTS[j]} "
-                               f"{predicted_torque[j]:+.2f} N·m")
+        self.check_torque(predicted_torque, "预计 PD ")
+        if feedforward is not None:
+            self.check_torque(predicted_torque + feedforward, "预计 PD 与前馈合计")
         error = np.abs(q - state.q)
         if np.max(error[:2]) > self.limits.torso_error:
             raise ControlFault("腰部无法保持捕获姿态，停止轨迹")
@@ -153,7 +165,20 @@ class Geometry:
         ids = [mujoco.mj_name2id(self.arm.m, mujoco.mjtObj.mjOBJ_JOINT, n)
                for n in CONTROLLED_JOINTS]
         self.qadr = self.arm.m.jnt_qposadr[ids]
+        self.gravity_dofs = self.arm.m.jnt_dofadr[np.asarray(ids)[GRAVITY_JOINTS]]
         self.arm._fd.qpos[self.qadr] = captured
+
+    def gravity_feedforward(self, q):
+        # 规划数据始终使用零速度。用静态 RNE 计算重力，不把接触力或约束反力发给电机。
+        model, data = self.arm.m, self.data
+        data.qpos[self.qadr] = q
+        mujoco.mj_kinematics(model, data)
+        mujoco.mj_comPos(model, data)
+        bias = np.zeros(model.nv)
+        mujoco.mj_rne(model, data, 0, bias)
+        feedforward = np.zeros_like(q)
+        feedforward[GRAVITY_JOINTS] = bias[self.gravity_dofs]
+        return feedforward
 
     def collision(self, q):
         self.data.qpos[self.qadr] = q
@@ -212,31 +237,57 @@ def transition(start, end, limits, minimum=3.0):
 
 
 def validate_motion(motion, guard, geometry, captured, line_xy=None, tip_speed_limit=None,
-                    stage="trajectory"):
+                    stage="trajectory", tip_rotation=None):
     # 几何预检覆盖整个运动，不在发送期间计算 IK。
-    n = max(2, int(np.ceil(motion.duration / 0.01)) + 1)
-    transverse, peak_tip_speed = 0.0, 0.0
-    for t in np.linspace(0, motion.duration, n):
+    duration = 2 * motion.one_way_duration if isinstance(motion, LocalPathMotion) else motion.duration
+    n = max(2, int(np.ceil(duration / 0.01)) + 1)
+    transverse, peak_tip_speed, rotation_error = 0.0, 0.0, 0.0
+    peak_gravity = np.zeros(len(GRAVITY_JOINTS))
+    for t in np.linspace(0, duration, n):
         q = captured.copy()
         q[LEFT] = motion.sample(t)
         try:
             guard.position(q)
             geometry.collision(q)
+            if guard.limits.gravity_compensation:
+                ff = geometry.gravity_feedforward(q)
+                guard.check_torque(ff, "规划重力前馈")
+                peak_gravity = np.maximum(peak_gravity, np.abs(ff[GRAVITY_JOINTS]))
         except ControlFault as exc:
             raise PlanningFault(str(exc), failure_detail(exc, stage, q, time_s=float(t))) from exc
         if line_xy is not None:
             p = geometry.data.xpos[geometry.arm.tip]
             transverse = max(transverse, float(np.linalg.norm(p[:2] - line_xy)))
+        if tip_rotation is not None:
+            rotation = geometry.data.xmat[geometry.arm.tip].reshape(3, 3)
+            rotation_error = max(rotation_error, float(np.linalg.norm(rotation - tip_rotation)))
         if tip_speed_limit is not None:
             velocity = geometry.arm.position_jacobian(q[LEFT]) @ motion.sample(t, 1)
             peak_tip_speed = max(peak_tip_speed, float(np.linalg.norm(velocity)))
     if line_xy is not None and transverse > .001:
         raise ControlFault(f"插值轨迹偏离目标直线 {transverse*1000:.2f} mm")
+    if tip_rotation is not None:
+        motion.checked_max_rotation_deg = float(np.degrees(2*np.arcsin(
+            min(1., rotation_error / (2*np.sqrt(2))))))
+        if motion.checked_max_rotation_deg > .5:
+            raise ControlFault(f"扫描腕部朝向偏差 {motion.checked_max_rotation_deg:.2f}°")
     if tip_speed_limit is not None:
         if peak_tip_speed > tip_speed_limit*(1+1e-4):
             raise ControlFault(f"FK 复核的末端速度超限: {peak_tip_speed:.4f} m/s")
         motion.checked_peak_tip_speed = peak_tip_speed
+    if guard.limits.gravity_compensation:
+        motion.peak_gravity_nm = peak_gravity
     return transverse
+
+
+def check_capture(captured, guard, geometry):
+    try:
+        guard.position(captured)
+        geometry.collision(captured)
+    except ControlFault as exc:
+        raise PlanningFault("捕获起始姿态未通过模型预检: " + str(exc),
+                            {"captured_q_rad": captured.tolist(),
+                             "failures": [failure_detail(exc, "captured", captured)]}) from exc
 
 
 def continuous_line_ik(geometry, captured, points, limits, diagnostics):
@@ -305,13 +356,7 @@ def scan_plan(captured, limits, length=.50, forward=.02, center_dz=.20,
         points, _ = make_line(arm, length, forward, center_dz, 101)
     points = np.asarray(points)
     guard = Guard(limits)
-    try:
-        guard.position(captured)
-        geometry.collision(captured)
-    except ControlFault as exc:
-        raise PlanningFault("捕获起始姿态未通过模型预检: " + str(exc),
-                            {"captured_q_rad": captured.tolist(),
-                             "failures": [failure_detail(exc, "captured", captured)]}) from exc
+    check_capture(captured, guard, geometry)
     diagnostics = {"rejected": 0, "last_error": "没有可用分支", "failures": []}
     for distances, solutions, errors, slopes, branch in continuous_line_ik(
             geometry, captured, points, limits, diagnostics):
@@ -332,7 +377,7 @@ def scan_plan(captured, limits, length=.50, forward=.02, center_dz=.20,
                             f"{diagnostics['last_error']}",
                             {"captured_q_rad": captured.tolist(),
                              "failures": diagnostics["failures"]})
-    report = {"ik_max_mm": float(max(errors) * 1000), "length_m": length,
+    report = {"scan_mode": "adaptive", "ik_max_mm": float(max(errors) * 1000), "length_m": length,
               "end_effectors": geometry.arm.end_effectors,
               "target_bottom_m": np.asarray(points[0]).tolist(),
               "target_top_m": np.asarray(points[-1]).tolist(),

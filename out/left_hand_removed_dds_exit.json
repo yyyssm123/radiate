@@ -1,6 +1,0 @@
-{
-  "returncode": 0,
-  "network": "lo",
-  "domain": 214,
-  "scope": "Local simulation only; no physical NIC or hardware commands."
-}
