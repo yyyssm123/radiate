@@ -123,7 +123,8 @@ python3 tools/test_dds_e2e.py --action scan --speed 0.10
 结果保存在 `out/dds_probe_e2e.json`、`out/dds_scan_e2e.json`，
 详细日志位于对应报告的 `records` 目录；测试不会连接物理网卡。
 
-当前左手拆除配置已通过 95 项回归，并用 `out/shoulder_collision_state.json` 的现场角度
+最近一次完整回归通过 100 项测试，当前固定扫描、可选重力前馈和后台日志均已进入验证。
+以下为历史自适应版本的复现记录，该阶段通过 95 项回归，并用 `out/shoulder_collision_state.json` 的现场角度
 完成本机真实 DDS + MuJoCo 扫描，稳定报告为 `out/dds_scan_left_hand_removed_e2e.json`。
 可复现同一姿态：
 
@@ -155,7 +156,8 @@ python3 tools/test_dds_e2e.py --action scan --speed 0.10 --pose-json out/shoulde
 
 完整扫描进入 `finished-hold` 后，由测试发送停止信号退出；最终目标回到捕获姿态。
 这里通过的是协议与控制流程，表中的物理误差仍然存在，不代表毫米级轨迹精度通过。
-用户已在 eth6 读回真机服务列表，设备方向、固件接管和实际运动仍未实测。
+后续固定扫描已有真机完整单次往返和收臂记录。当前用户报告全程抖动，稳定性仍待诊断，
+任务精度和固件接管行为需单独验收。项目最新运行说明见 README.md。
 
 `run_real.py` 为兼容保留的实现入口，旧命令仍可用。`line_servo_demo.py` 是独立进程内
 的物理诊断工具，`replay` 是理想跟随离线夹具，二者都不代替真实 DDS 联调。

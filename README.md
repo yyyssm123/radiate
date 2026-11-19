@@ -6,9 +6,11 @@
 **仿真与真机统一入口见 [DDS_USAGE.md](DDS_USAGE.md)**：先启动独立 MuJoCo DDS
 仿真器，控制器统一运行 `line_demo/line_scan.py`；本地用 `--network lo`，接机只换网卡名。
 
-安装、只读检查、保持和单关节验证见 [REAL_ROBOT.md](REAL_ROBOT.md)。目前已通过
-95 项回归测试和独立进程的真实 DDS + MuJoCo 完整扫描；用户已读回真机服务与 LowState。
-现场已确认左灵巧手拆除，正式模型默认按此装配生成，真机扫描仍需现场复测。
+安装、只读检查、保持和单关节验证见 [REAL_ROBOT.md](REAL_ROBOT.md)。最近一次完整回归
+通过 100 项测试，MuJoCo 已通过独立进程的 DDS 完整扫描，真机也已有单次扫描和收臂完成记录。
+现场已确认左灵巧手拆除，右手保留 Dex3。用户已修正造成 21 号腕偏航受阻的反装螺丝，
+目前报告真机启动后各阶段都有抖动，根因仍待本次真机日志验证。单次完成记录不代表
+连续运行稳定性或末端精度验收通过。
 
 默认扫描复用同一条 50 cm 竖直关节轨迹，腕部朝向固定。首帧和启动保持使用实时
 `LowState` 捕获的关节角，左臂限速接近扫描起点后等待实测停稳，再开始扫描。
@@ -20,25 +22,85 @@
 ```bash
 cd /home/lenovo/fushe-G1-D
 
-# 离线运动学检查，不连接硬件
-python3 line_demo/line_servo_demo.py --check
+# 离线检查当前默认固定扫描，不连接 DDS
+python3 line_demo/line_scan.py check --speed 0.10
 
-# 打开 MuJoCo 窗口，播放一个完整往返
-python3 line_demo/line_servo_demo.py --cycles 1
+# 终端 1 启动 MuJoCo，保持窗口打开，等待 DDS_SIM_READY
+python3 line_demo/mujoco_sim.py --network lo
 
-# 不打开窗口，不等待墙钟时间，计算完整物理仿真
-python3 line_demo/line_servo_demo.py --no-viewer --fast --cycles 1
+# 终端 2 运行同一套扫描控制器
+python3 line_demo/line_scan.py scan --network lo --cycles 1 --speed 0.10
 ```
 
-依赖在 `requirements.txt`。需要重建场景时运行：
+真机网卡为 `eth6`。以下命令只读取状态并规划，报告中的 `published_commands` 应为 0。
+去掉 `--dry-run` 会发送运动指令，并等待遥控器 A 启动。现场正在排查的抖动需先确认。
+
+```bash
+python3 line_demo/line_scan.py scan --network eth6 --cycles 1 --speed 0.10 \
+  --gravity-compensation --dry-run --report out/real_scan_preflight.json
+```
+
+`--gravity-compensation` 默认关闭，可选用于固定扫描的左肩俯仰和左肘。
+仿真也可使用同一选项。它在启动保持结束后用 2 秒平滑接入力矩前馈。
+一次 `--cycles 1` 包括上行、下行各 50 cm；多次往返共用一次接近和一次收臂。
+结束时持续保持收臂目标，第一次 Ctrl+C 停止轨迹，第二次退出发送。
+
+## 速度与轨迹
+
+| 参数 | 默认值 | 含义 |
+|---|---:|---|
+| `--speed` | 0.03 m/s | 左腕参考点的路径速度上限 |
+| `--joint-speed` | 0.25 rad/s | 各受控关节的目标角速度上限 |
+| `--joint-acceleration` | 0.50 rad/s² | 目标角加速度上限 |
+| `--cycles` | 1 | 扫描往返次数 |
+
+固定轨迹保存在 `models/scan_profile.json`，含 101 组左臂关节角。改变速度参数时会为
+同一路径重新计时并预检，路径无需重新生成。默认关节约束下，`--speed 0.10` 和 `0.20`
+的扫描往返均约 31.78 秒，路径峰值约 4.75 cm/s。关节速度改为 0.30 rad/s、加速度保持
+0.50 rad/s² 时，往返约 26.86 秒，已在本机仿真记录中验证。程序接受的参数上限为
+0.50 rad/s 和 1.00 rad/s²，真机适用值需实测验证。
+
+`--scan-mode adaptive` 会根据启动姿态重新求 IK。指定 `--anchor` 或更改扫描线几何参数
+也会选择 adaptive；显式 fixed 与自定义扫描线参数同时使用会报错。
+
+## 主要代码
+
+| 文件 | 职责 |
+|---|---|
+| `line_demo/line_scan.py` | 统一命令入口 |
+| `line_demo/run_real.py` | 参数、启动、预检和控制循环 |
+| `line_demo/fixed_scan.py` | 固定扫描以及接近、收臂路线 |
+| `line_demo/path_timing.py` | 路径局部速度规划 |
+| `line_demo/real_runtime.py` | 分段执行、停稳判断、重力前馈和后台 CSV |
+| `line_demo/real_motion.py` | IK、过渡轨迹、碰撞和反馈保护 |
+| `line_demo/g1d_config.py` | 模型路径、关节槽位和 PD |
+| `line_demo/g1d_transport.py` | HG LowCmd/LowState、CRC 和 DDS |
+| `line_demo/mujoco_sim.py` | DDS 物理仿真器 |
+| `tools/build_scan_profile.py` | 离线生成待复核扫描配置 |
+
+运行结果写入 `out/`，包括规划 JSON、约 50 Hz 的轨迹 CSV 和退出状态 `.status.json`。
+后者包含 `loop_timing`、日志丢行数和写盘错误。`out/` 和 Python 缓存已加入 `.gitignore`。
+
+## 安装与验证
+
+依赖在 `requirements.txt`，官方 Python SDK 路径按本机安装位置指定。
+
+```bash
+python3 -m pip install -r requirements.txt
+python3 -m pip install -e /home/lenovo/unitree_sdk2_python
+python3 -m unittest discover -s line_demo -p 'test_*.py' -v
+python3 tools/test_dds_e2e.py --speed 0.10 --gravity-compensation
+```
+
+测试工具绑定本机 `lo` 和隔离 DDS 域。重建场景和生成预览的命令为
 
 ```bash
 python3 line_demo/build_model.py
-python3 -m unittest discover -s line_demo -p 'test_*.py' -v
 python3 line_demo/render_preview.py
 ```
 
-预览输出到 `out/g1d_preview.png`，物理验证记录在 `out/verification.log`。
+预览输出到 `out/g1d_preview.png`。固定扫描配置记录场景摘要，重建后如果摘要变化，需生成
+并复核新的扫描配置，见 [PLANNING.md](PLANNING.md)。
 
 ## 末端装配
 
@@ -89,16 +151,20 @@ MuJoCo 的 16 个执行器编号与 DDS 槽位分开，按关节名关联，不�
 仿真保持力矩电机，使用：
 
 ```text
-tau = KP * (q_target - q_actual) - KD * dq_actual
+tau = tau_ff + KP * (q_target - q_actual) - KD * dq_actual
 ```
 
-对应 SDK 示例的 `dq=0、tau_ff=0`。输入、执行器输出和关节总力矩都有来自 URDF
-的限制；例如腕 pitch/yaw 为 ±5 N·m。没有放大 KP/KD，也没有偷偷加入重力前馈。
+默认采用 SDK 示例的 `dq=0、tau_ff=0`，双臂 KP/KD 为 40/1。
+显式指定 `--gravity-compensation` 时，仅左肩俯仰和左肘的 `tau_ff` 使用模型静态重力。
+CSV 中 `pd_est_Nm` 和 `tau_ff_Nm` 分别记录 PD 估计与前馈。实际力矩由电机固件执行，
+发送前检查 PD 和 PD 加前馈的预算。例如腕 pitch/yaw 的 URDF 力矩上限为 5 N·m，
+默认发送前预算为其 90%，即 4.5 N·m。默认锁腰配置禁用槽位 14 的电机指令。
 
-## 默认轨迹和验证结果
+## 独立诊断演示及历史结果
 
 本节列出独立诊断工具 `line_servo_demo.py` 的参数和结果；统一 DDS 控制器
-`line_scan.py` 的新速度规划与验证结果见 [PLANNING.md](PLANNING.md)。
+`line_scan.py` 的速度规划与验证结果见 [PLANNING.md](PLANNING.md)。该工具可用
+`python3 line_demo/line_servo_demo.py --check` 或 `--no-viewer --fast --cycles 1` 运行。
 
 保留 50 cm 竖直线，针对 G1-D 重新选择了位置，参数都以零位左腕为参考：
 

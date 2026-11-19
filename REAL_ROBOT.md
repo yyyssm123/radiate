@@ -5,11 +5,13 @@
 发送协议依据本地 SDK 的
 `example/g1/g1d/g1d_arm_example.cpp`：`rt/lowstate` → `rt/lowcmd`、HG IDL、
 `mode_pr=0`、回显反馈的 `mode_machine`、SDK CRC。双臂 KP=40/KD=1，腰 yaw=60/1、
-pitch=40/1，`dq=0 / tau_ff=0`。没有放大官方增益。
+pitch=40/1，默认 `dq=0 / tau_ff=0`。固定扫描可显式添加左肩俯仰和左肘重力前馈。
+锁定配置禁用槽位 14 的指令。
 
-软件入口、离线验证和本机真实 DDS/MuJoCo 联调已经完成；用户已在 eth6 读回真机服务列表，
-真机网卡通信、固件接管、关节方向和
-任务精度仍需接机测量。`replay` 的理想跟随结果不能当作真机或物理仿真结果。
+软件入口、离线验证和本机 DDS/MuJoCo 联调已完成，真机已有单次扫描及收臂完成记录。
+用户已修正 21 号腕偏航受阻的反装螺丝，目前报告启动后各阶段抖动，仍需对应日志诊断。
+持续运行稳定性、任务精度和固件失联接管行为需继续测量。
+`replay` 是理想跟随夹具，精度评估需要物理仿真与真机数据。
 
 ## 环境
 
@@ -272,7 +274,7 @@ python3 line_demo/run_real.py replay --report out/real_replay.json --log out/rea
 python3 line_demo/run_real.py check --state-json out/device.json
 ```
 
-已通过 95 项测试，覆盖模型、物理桥、官方增益、实际 IDL/CRC、无效槽位、坏包/NaN、冻结 tick、
+最近一次完整回归通过 100 项测试，覆盖模型、物理桥、官方增益、实际 IDL/CRC、无效槽位、坏包/NaN、冻结 tick、
 错误机型布局、故障、温度、模式切换、限位、速度/加速度、力矩、腰部漂移、停止键、
 只读入口不创建 writer，以及非零实测起点、保持、连续过渡和返回。默认垂臂示例的完整扫描
 共回放 22,949 条经过 SDK IDL 序列化、反序列化与 CRC 校验的命令，最后回到捕获姿态
