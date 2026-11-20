@@ -239,7 +239,7 @@ python3 line_demo/run_real.py scan --network eth6 --cycles 1
 |---|---:|
 | 目标下发周期 | 0.002 s，目标 500 Hz |
 | LowState 有效包/推进 tick 超时 | 0.20 s |
-| 控制循环最大调度间隔 | 0.05 s |
+| 控制循环最大调度间隔 | 0.07 s（70 ms） |
 | 目标关节角速度 | ≤0.25 rad/s |
 | 目标关节角加速度 | ≤0.5 rad/s² |
 | 目标距 URDF 限位余量 | ≥0.02 rad |

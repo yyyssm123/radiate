@@ -233,10 +233,24 @@ class TestController(unittest.TestCase):
         self.assertGreater(previous[LEFT[0]], 0.)
 
     def test_scheduling_gap_is_not_caught_up_by_jumping(self):
-        controller = Controller(self.robot.read(), [], NoCollision(), self.limits, 0.)
-        controller.tick(self.robot.read(), 0.)
-        with self.assertRaisesRegex(ControlFault, "调度"):
-            controller.tick(self.robot.read(), .06)
+        for gap in (.0628, .07):
+            with self.subTest(allowed_gap=gap):
+                self.robot.refresh(0.)
+                controller = Controller(self.robot.read(), [], NoCollision(), self.limits, 0.)
+                controller.tick(self.robot.read(), 0.)
+                self.robot.refresh(gap)
+                tick = controller.tick(self.robot.read(), gap)
+                self.assertEqual(tick.phase, "startup-hold")
+                np.testing.assert_array_equal(tick.q, np.zeros(16))
+        for gap in (.070001, .08):
+            with self.subTest(rejected_gap=gap):
+                self.robot.refresh(0.)
+                controller = Controller(self.robot.read(), [], NoCollision(), self.limits, 0.)
+                controller.tick(self.robot.read(), 0.)
+                self.robot.refresh(gap)
+                with self.assertRaisesRegex(ControlFault, "调度"):
+                    controller.tick(self.robot.read(), gap)
+                self.assertEqual(controller.previous, 0.)
 
     def test_retimed_trajectory_respects_derivative_limits(self):
         motion = self.segments[0][1]

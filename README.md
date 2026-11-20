@@ -80,6 +80,7 @@ python3 line_demo/line_scan.py scan --network eth6 --cycles 1 --speed 0.10 \
 
 运行结果写入 `out/`，包括规划 JSON、约 50 Hz 的轨迹 CSV 和退出状态 `.status.json`。
 后者包含 `loop_timing`、日志丢行数和写盘错误。`out/` 和 Python 缓存已加入 `.gitignore`。
+控制循环相邻两轮间隔超过 70 ms 时停止轨迹与发送，目标发送周期为 2 ms。
 
 ## 安装与验证
 

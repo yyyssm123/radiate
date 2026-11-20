@@ -107,7 +107,7 @@ class Controller:
         if state is None:
             raise ControlFault("没有 LowState")
         dt = now - self.previous
-        if dt <= 0 or dt > .05:
+        if dt <= 0 or dt > .07:
             raise ControlFault(f"控制循环调度间隔异常: {dt:.4f} s")
         # SDK 遥控器的 A/B 新按下时停止轨迹，保持最后目标。
         pressed = state.buttons & ~self.last_buttons
